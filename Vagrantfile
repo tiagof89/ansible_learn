@@ -28,6 +28,9 @@ Vagrant.configure(2) do |config|
                 vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
             end
             config.ssh.forward_agent = true
+    	    config.vm.provision "shell", inline: <<-SHELL
+                echo "ubuntu:ubuntu" | sudo chpasswd
+	    SHELL
             #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
             # config.vm.provision "ansible" do |ansible|
             #     ansible.playbook       = "playbook.yml"
